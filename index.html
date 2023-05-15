@@ -99,7 +99,7 @@ Promise.all([
     document.cookie.split(/;\s?/).forEach(c => document.cookie = c.replace(/=.*/, `=; max-age=0; path=/`))
 ]).catch(er => console.error(er));
 document.querySelector('input').onkeypress = ev => {
-    if (ev.code != 'Enter') return;
+    if ((ev.keyCode || ev.which) != 13) return;
     if (/^i#.+$/.test(ev.target.value))
         return location.href = `https://instagram.com/explore/tags/${/(?<=#).+/.exec(ev.target.value)}`;
     if (/^t\?.+$/.test(ev.target.value))
