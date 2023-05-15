@@ -90,6 +90,7 @@
 <dl>
     <div><dt>BX-14</dt><dd>Random Booster</dd></div>
 </dl>
+<input>
 <script>
 Promise.all([
     new Promise((res, rej) => Object.assign(indexedDB.deleteDatabase('V6'), {onsuccess: res, onblocked: rej, onerror: rej})),
@@ -98,7 +99,7 @@ Promise.all([
     document.cookie.split(/;\s?/).forEach(c => document.cookie = c.replace(/=.*/, `=; max-age=0; path=/`))
 ]).catch(er => console.error(er));
 document.querySelector('input').onkeypress = ev => {
-    if (ev.code != 'Enter') return;/
+    if (ev.code != 'Enter') return;
     if (/^i#.+$/.test(ev.target.value))
         return location.href = `https://instagram.com/explore/tags/${/(?<=#).+/.exec(ev.target.value)[1]}`;
     if (/^t\?.+$/.test(ev.target.value))
