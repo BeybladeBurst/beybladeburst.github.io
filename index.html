@@ -101,9 +101,9 @@ Promise.all([
 document.querySelector('input').onkeypress = ev => {
     if (ev.code != 'Enter') return;
     if (/^i#.+$/.test(ev.target.value))
-        return location.href = `https://instagram.com/explore/tags/${/(?<=#).+/.exec(ev.target.value)[1]}`;
+        return location.href = `https://instagram.com/explore/tags/${/(?<=#).+/.exec(ev.target.value)}`;
     if (/^t\?.+$/.test(ev.target.value))
-        return location.href = `https://twitter.com/search?q=${/(?<=\?).+/.exec(ev.target.value)[1]}&f=live`;
+        return location.href = `https://twitter.com/search?q=${/(?<=\?).+/.exec(ev.target.value)}&f=live`;
     return location.href = ev.target.value;
 }
 </script>
