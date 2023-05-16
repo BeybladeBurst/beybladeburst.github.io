@@ -105,7 +105,7 @@ document.querySelector('input').onkeypress = ev => {
     if (/^t\?.+$/.test(ev.target.value))
         return location.href = `https://twitter.com/search?q=${/(?<=\?).+/.exec(ev.target.value)}&f=live`;
     if (/^t#.+$/.test(ev.target.value))
-        return location.href = `https://twitter.com/hashtag/${/(?<=#).+/.exec(ev.target.value)}&f=live`;
+        return location.href = `https://twitter.com/hashtag/${/(?<=#).+/.exec(ev.target.value)}/?f=live`;
     return location.href = `https://${ev.target.value}`;
 }
 </script>
