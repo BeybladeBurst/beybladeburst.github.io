@@ -104,6 +104,8 @@ document.querySelector('input').onkeypress = ev => {
         return location.href = `https://instagram.com/explore/tags/${/(?<=#).+/.exec(ev.target.value)}`;
     if (/^t\?.+$/.test(ev.target.value))
         return location.href = `https://twitter.com/search?q=${/(?<=\?).+/.exec(ev.target.value)}&f=live`;
+    if (/^t#.+$/.test(ev.target.value))
+        return location.href = `https://twitter.com/hashtag/${/(?<=#).+/.exec(ev.target.value)}&f=live`;
     return location.href = `https://${ev.target.value}`;
 }
 </script>
