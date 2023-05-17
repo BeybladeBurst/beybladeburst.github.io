@@ -9,7 +9,7 @@
         font-family:sans-serif;        
     }
     body {
-        background:url(https://pbs.twimg.com/media/Fku0cAWVUAAgHrH?format=jpg&name=large) no-repeat center center / cover,black;
+        background:linear-gradient(320deg, rgba(15, 15, 15, 1) 0%, rgba(25, 25, 25, 1) 90%, rgba(45, 45, 45, 1) 100%);
         min-height:100%;
         opacity: 1 !important;
         margin:0;
@@ -38,6 +38,7 @@
     }
     h2 {
         font-size:1.6em;
+        text-align:center;
     }
     h2::first-letter {
         font-size:1.5em;
@@ -57,7 +58,7 @@
         text-align: center;
     }
 </style>
-
+<input>
 <div style='text-align:right;'>
     <a href=https://beyblade-burst.github.io>往 Beyblade Burst ▶️</a>
 </div>
@@ -176,7 +177,6 @@
    <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx08.png>
 </article>
 
-<input>
 <script>
 Promise.all([
     new Promise((res, rej) => Object.assign(indexedDB.deleteDatabase('V6'), {onsuccess: res, onblocked: rej, onerror: rej})),
