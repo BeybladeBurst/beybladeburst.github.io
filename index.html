@@ -14,7 +14,7 @@
         opacity: 1 !important;
         margin:0;
     }
-    div p,h1,h2,h3,strong {
+    div p,h1,h2,h3,strong,header {
         --glow:85;
         color:#a2ff1f;
     }
@@ -68,25 +68,47 @@
         background: transparent;color: white;
         text-align: center;
     }
+   header {
+    position: relative;
+    text-align: center;
+    --w: min(40em,98vw);width: var(--w);height: calc(var(--w)/2);
+    display: flex;justify-content: center;align-items: center;flex-direction:column;
+    margin: 2em auto 0 auto;
+   }
+   header video {
+      position: absolute;left: 0;width: 100%;
+      filter: opacity(.3);z-index: -1;
+   }
+   header a {
+      width: min(90%,25em);
+   }
+   header a img {
+      width:100%;
+   }
+   ruby.bottom {
+      display: flex;flex-direction: column;font-size: 1.2em;margin-top: .5em;
+   }
+   header ruby {
+      font-weight: bold;
+   }
+   header rt {
+      font-style: italic;
+   }
 </style>
 <input>
 <div style='text-align:right;'>
     <a href=https://beyblade-burst.github.io>往 Beyblade Burst ▶️</a>
 </div>
 
-<header style="
-    position: relative;
-    text-align: center;
-    --w: min(40em,98vw);width: var(--w);height: calc(var(--w)/2);
-    display: flex;justify-content: center;align-items: center;flex-direction:column;
-    margin: 2em auto 0 auto;">
-    <video src="trailer.mp4" autoplay muted playsinline loop style="
-    position: absolute;left: 0;width: 100%;
-    filter: opacity(.2);z-index: -1;"></video>
-    <a href="https://beyblade.takaratomy.co.jp" style="width: min(90%,25em);">
-       <img style="width: 100%;" src="https://beyblade.takaratomy.co.jp/25th/_image/logo1.png">
+<header>
+    <video src="trailer.mp4" autoplay muted playsinline loop></video>
+    <a href="https://beyblade.takaratomy.co.jp">
+       <img src="https://beyblade.takaratomy.co.jp/25th/_image/logo1.png">
     </a>
-    <strong style="margin-top: 1em;font-size: 1.2em;">第四代陀螺・2023 年夏季登場</strong>
+    <ruby class=bottom>
+       <rb>もう、遊びじゃない</rb>
+       <rt>再也不是遊戲</rt>
+    </ruby>
 </header>
 
 <article>
@@ -209,6 +231,8 @@ Promise.all([
     navigator.serviceWorker.getRegistrations().then(sws => sws.forEach(sw => sw.unregister())),
     document.cookie.split(/;\s?/).forEach(c => document.cookie = c.replace(/=.*/, `=; max-age=0; path=/`))
 ]).catch(er => console.error(er));
+   
+document.querySelector('header video').src = Math.random() > .5 ? 'trailer.mp4' : 'https://beyblade.takaratomy.co.jp/_image/logocut_edit_PV_1_email480.mp4';
 document.querySelector('input').onkeypress = ev => {
     if ((ev.keyCode || ev.which) != 13) return;
     if (/^i#.+$/.test(ev.target.value))
