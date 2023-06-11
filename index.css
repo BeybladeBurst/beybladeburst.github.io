@@ -1,0 +1,323 @@
+/*reset*/
+h1,h3,h4,h4,h5,h6,code,a,u,b,i,em,button {
+    all:unset;
+}
+*,*::before,*::after {
+    box-sizing:border-box !important;
+}
+summary:focus {
+    outline:none;
+}
+body,menu,ul,ol,dl,dt,dd,summary,figure {
+    list-style:none;
+    margin:0; padding:0;
+}
+[hidden] {
+    display:none !important;
+}
+
+/*site*/
+a:target,a.target {
+    animation:highlight 1s ease 3;animation-delay:0.5s;
+    scroll-margin-top:5rem;
+}
+@keyframes highlight {from {filter:brightness(300%);} }
+a.disabled {
+    filter:saturate(0%);
+    pointer-events:none;
+}
+section {
+    text-align:center;
+    margin:auto;
+}
+label,button,summary,[onclick],a[href] {
+    transition:filter .3s,opacity .3s,background-color .3s;
+}
+a[href]:not(.disabled):hover {
+    filter:brightness(110%);
+}
+:is(label:not([for=popup]),button:not([disabled]),summary,[onclick]):hover {
+    filter:brightness(90%);
+}
+input[type=checkbox],input[type=radio],::-webkit-details-marker {
+    display:none;
+}
+
+/*theme*/
+:root,input,input::placeholder,button,db-status,.groups h3,.groups h4,.groups h4 {
+    font-family:MAIN,Hiragino maru Gothic Pro,
+        Noto Sans CJK TC Demilight,Noto Sans CJK TC,
+        Source Han Sans TC Demilight,Source Han Sans TC,
+        微軟正黑體,Microsoft JhengHei,Sans-Serif;
+}
+:root {
+    font-size:min(20px,5vw); font-family:sans-serif;
+    color:white; --theme:#a2ff1f; --theme-50:#a2ff1f80; --theme-dark:#518010;
+    --base-bg:#152211;
+}
+body {
+    background:var(--base-bg);
+}
+label:not([for=popup]),button:not([disabled]),summary,[onclick],a[href]:not(.disabled) {
+    color:var(--theme);
+    cursor:pointer;
+}
+
+/*components*/
+ruby.bottom {
+    display:flex; flex-direction:column;
+}
+.no-img {
+    position:relative;
+    display:inline-block;
+}
+.no-img::before {
+    content:'🖼️';
+    font-size:5em;
+    line-height:1.4;
+}
+.no-img::after {
+    content:'';
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) rotate(-45deg);
+    width:120%; height:.5em; background:#ff0000A0;
+    border-radius:9em;
+}
+.limited {
+    position:relative;
+    max-height:25em; overflow:hidden;
+    display:flex; gap:.5em .1em; flex-wrap:wrap;
+    justify-content:center;
+}
+.limited button {
+    position:absolute; bottom:0;
+    width:100%;
+    line-height:3em;
+    background:linear-gradient(transparent,var(--base-bg)); color:var(--theme);
+    z-index:8;
+}
+a.links {
+    font-size:2em;
+    display:block;
+    --size:2em; width:var(--size); height:var(--size);
+    line-height:var(--size);
+    border-radius:9em;
+    background:conic-gradient(
+        var(--theme) calc(var(--angle) - 190deg),
+        transparent calc(var(--angle) - 190deg) calc(var(--angle) - 170deg),
+        var(--theme) calc(var(--angle) - 170deg) calc(var(--angle) + 170deg),
+        transparent calc(var(--angle) + 170deg) calc(var(--angle) + 190deg),
+        var(--theme) calc(var(--angle) + 190deg)
+    );
+    transition:--angle 1s;
+    position:relative;
+    z-index:0;
+}
+a.links::before {
+    content:'';
+    position:absolute; left:.1em; top:.1em;
+    width:calc(-.2em + 100%); height:calc(-.2em + 100%);
+    border-radius:9em; 
+    z-index:-1;
+    background:conic-gradient(
+        var(--theme-dark) calc(var(--angle) - 180deg),
+        var(--base-bg) calc(var(--angle) - 180deg) 180deg,
+        var(--theme-dark) 180deg calc(180deg + var(--angle)),
+        var(--base-bg) calc(180deg + var(--angle))
+    );
+    transition:--angle 1s;
+}
+a.links::after {
+    content:'';
+    position:absolute; left:50%; --top:.85; top:calc(100%*var(--top));
+    transform:translate(-50%,0) rotate(var(--angle)); transform-origin:center calc((.5 - var(--top))*var(--size)/var(--scale,1));
+    transition:--angle 1s;
+    border:solid transparent; border-width:0 .15em .5em .15em; border-bottom-color:var(--theme);
+}
+a.links:hover,a.links:hover::before,a.links:hover::after {
+    --angle:360deg;
+}
+@property --angle {
+    syntax:'<angle>'; inherits:false;
+    initial-value:0deg;
+}
+
+/*index*/
+input {
+    all:unset;
+    width:100%; height:1em;
+    background:transparent; color:white;
+    text-align:center;
+}
+header {
+    position:relative;
+    --w:min(40em,100vw); width:var(--w); height:calc(var(--w)/16*9);
+    display:flex; justify-content:center; align-items:center; flex-direction:column;
+    margin:2em auto 0 auto;
+}
+header video {
+    position:absolute; left:0; width:100%;
+    filter:opacity(0); z-index:-1;
+    transition:filter 1s;
+}
+header video:not([src='']) {
+    filter:opacity(.3);
+}
+header img {
+    width:min(90%,25em);
+}
+header ruby {
+    font-weight:bold; font-size:1.2em; margin-top:.5em;
+}
+header rt {
+    font-style:italic;
+}
+
+section,article {
+    padding:0 .5rem; margin-top:4rem;
+    position:relative;
+    max-width:40em;
+}
+section::before,section::after {
+    content:'';
+    width:calc(50% - 4em); height:1em;
+    position:absolute; top:3em;
+    border:.2em solid;
+}
+section::before {
+    left:.5em;
+    border-color:var(--theme) transparent transparent var(--theme);
+}
+section::after {
+    right:.5em;
+    border-color:var(--theme) var(--theme) transparent transparent;
+}
+h3 {
+    margin-bottom:2em;
+    display:flex; flex-direction:column;
+    position:relative;
+    font-weight:bold;
+}
+h3::before,h4::before {
+    font-size:2em;
+    display:block;
+}
+h3::before {margin-bottom:1em;}
+h4::before {margin-bottom:.1em;}
+section h3::after {
+    content:'';
+    position:absolute; left:50%; top:1.5em;
+    transform:translate(-50%,-50%) rotate(45deg);
+    width:3.5em; height:3.5em;
+    border:.2em solid;
+}
+summary {list-style:revert;}
+summary::marker {content:'▶';}
+summary::after  {content:'◀';}
+details[open]>summary::marker,details[open]>summary::after {content:'▼';}
+details {
+    margin:2em auto;
+}
+
+#links menu {
+    display:flex; gap:1em .75em; justify-content:center; flex-wrap:wrap;
+    margin:1em auto;
+}
+@media screen and (min-width:590px) {
+    #links menu {justify-content:space-between;}
+}
+#links menu a {
+    margin-bottom:.5em;
+}
+#links menu span {
+    font-size:.8em;
+}
+#links div {
+    background:var(--theme-50); border-radius:1em;
+    display:grid; grid-template:auto / max(4em,20%) 1fr 1fr ;
+    gap:.5em; padding:.5em .5em 0 .5em;
+}
+#links h4 {
+    grid-area:1/1/5/2;
+    align-self:center;
+}
+#links h3::before {content:'🔗';}
+#links h4::before {content:'▶️';}
+#links div a {
+    border:.1em solid var(--theme); border-radius:.75em;
+    height:5em;
+    text-align:right; line-height:5em; font-size:.9em;
+    padding-right:.3em;
+    transition:color .5s,--stop .5s;
+}
+#links div a:hover {
+    --stop:100%;
+    color:var(--base-bg);
+}
+#links small {
+    font-size:.75em;
+    display:block;
+}
+@property --stop {
+    syntax:'<percentage>'; inherits:false;
+    initial-value:0%;
+}
+@media screen and (max-width:430px) {
+    #links div a {line-height:1.7em;}
+}
+
+#products h3::before {
+    content:'🛍️'
+}
+#products time {
+    width:100%;
+    font-size:.8em;
+}
+#products time:not(:first-of-type) {
+    margin-top:1em;
+}
+#products figure {
+    width:min(18em,49%);
+    font-size:.8em;
+    position:relative;
+}
+#products figure::before {
+    content:'';
+    position:absolute; top:4%; left:5%;
+    --h:min(3em,8vw); height:var(--h); width:var(--h);
+    background:transparent no-repeat left / auto 100%;
+}
+#products :is(figure.r,figure.l)::before {
+    width:calc(var(--h)*2);
+}
+#products figure.A::before {background-image:url(https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/icon_atack.png)}
+#products figure.B::before {background-image:url(https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/icon_balance.png)}
+#products figure.D::before {background-image:url(https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/icon_defense.png)}
+#products figure.S::before {background-image:url(https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/icon_stamina.png)}
+#products figure img {
+    width:100%;
+}
+#products figcaption {
+    text-align:left;
+}
+#products dl {
+    padding:0 .2em;
+}
+#products dl::before {
+    content:'▲ ';
+}
+#products dt,#products dd {
+    display:inline;
+}
+#products dt+dd::before {
+    content:'：';
+}
+#products dd~dd::before {
+    content:'•';
+    margin:0 .5em 0 1em;
+}
+#products details img {
+    width:min(100%,19.5em);
+}
+
+#prizes h3::before {content:'🎁';}
+#points h3::before {content:'🪙';}
