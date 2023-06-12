@@ -51,7 +51,7 @@ input[type=checkbox],input[type=radio],::-webkit-details-marker {
         微軟正黑體,Microsoft JhengHei,Sans-Serif;
 }
 :root {
-    font-size:min(20px,5vw); font-family:sans-serif;
+    font-size:min(20px,4.5vw); font-family:sans-serif;
     color:white; --theme:#a2ff1f; --theme-50:#a2ff1f80; --theme-dark:#518010;
     --base-bg:#152211;
 }
