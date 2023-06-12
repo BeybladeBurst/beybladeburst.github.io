@@ -2,31 +2,24 @@
 <meta charset=UTF-8>
 <meta name=viewport content='width=device-width,initial-scale=1,maximum-scale=1'>
 <title>Beyblade X　爆旋陀螺 X　戰鬥陀螺 X</title>
+<link href="index.css" rel="stylesheet">
+<script src="common.js"></script>
 <style>
-    * {box-sizing:border-box;}
-    :root {
-        font-size:min(25px,5vw);font-family:sans-serif;        
+    body>details {
+        background: #555;
+        margin:3em 0 0 0;
     }
-    body {
-        background:linear-gradient(320deg, rgba(15, 15, 15, 1) 0%, rgba(25, 25, 25, 1) 90%, rgba(45, 45, 45, 1) 100%);
-        margin:0;
-    }
-    div p,h1,h2,h3,header {
-        color:#a2ff1f;
+    body>details summary {
+        height:3em;line-height:3em;text-align:center;
     }
     article {
-        padding:0 .5em;
-        color:white;font-size:.8em;
-        max-width:50em;margin:4em auto 0 auto;
-        text-align:center;
+        text-align:center;font-size:.8em;
+        margin:4em auto 0 auto;
     }
-    article:last-of-type {
-        max-width:100%;
+    details article h3 {
+        font-size:1.5em;
     }
-    article *:not(rt) {
-        text-align:left;
-    }
-    article p {
+    article p,article li {
         text-align:justify;
         line-height:1.5;
     }
@@ -36,78 +29,14 @@
     article img+p {
         margin-top:.25em;
     }
-    a {
-        text-decoration: none;
-        color:hsl(45,90%,48%);
-    }
-    h2 {
-        font-size:1.6em;
-        text-align:center;
-    }
-    h2::first-letter {
-        font-size:1.5em;
-        transform:translateY(-.5em);
-    }
-    article div {
-       display:flex;gap:.5em .1em;flex-wrap:wrap;
-       justify-content:center;
-    }
-    article figure {
-       width:49.7%;max-width:20em;
-       margin:0;
-    }
-    article div~img {
-       max-width:min(20em,100%);
-    }
-    input {
-        all: unset;
-        width: 100%;height: 1em;
-        background: transparent;color: white;
-        text-align: center;
-    }
-    header {
-        position: relative;
-        text-align: center;
-        --w: min(40em,100vw);width: var(--w);height: calc(var(--w)/16*9);
-        display: flex;justify-content: center;align-items: center;flex-direction:column;
-        margin: 2em auto 0 auto;
-    }
-    header video {
-        position: absolute;left: 0;width: 100%;
-        filter: opacity(0);z-index: -1;
-        transition: filter 1s;
-    }
-    header video:not([src='']) {
-        filter:opacity(.3);
-    }
-    header a {
-        width: min(90%,25em);
-    }
-    header a img {
-        width:100%;
-    }
-    ruby.bottom {
-        display: flex;flex-direction: column;
-    }
-    header ruby {
-        font-weight: bold;font-size: 1.2em;margin-top: .5em;
-    }
-    header rt {
-        font-style: italic;
-    }
-    ul {
-        padding-left:1.5em;
+    details article:last-child {
+        padding-bottom:1em;
     }
     q::before {content:'「';}
     q::after {content:'」';}
-    a[href*='youtu']::before,a[href*='twitter']::before  {content:'▶️ ';}
-   details {margin:2em auto;}
-   summary {height:2em;line-height:2em;}
-   header+p {
-      text-align:center;color:white;
-      border-top:.1em solid #a2ff1f;border-bottom:.1em solid #a2ff1f;
-      padding:.5em 0;
-   }
+    article a[href*='youtu']::before,article a[href*='twitter']::before  {content:'▶️ ';}
+
+    div+small {display:block;text-align: right;margin-top:.5em;font-size:.7em;}
 </style>
 <input>
 <div style='text-align:right;font-size:.9em;'>
@@ -116,188 +45,127 @@
 
 <header>
     <video src autoplay muted playsinline loop></video>
-    <a href=https://beyblade.takaratomy.co.jp/beyblade-x/>
-       <img src=https://beyblade.takaratomy.co.jp/25th/_image/logo1.png>
-    </a>
+    <img src=https://beyblade.takaratomy.co.jp/25th/_image/logo1.png>
     <ruby class=bottom>
        <rb>もう、遊びじゃない</rb>
        <rt>再也不是遊戲</rt>
     </ruby>
 </header>
 
-<p><strong style='font-size:.8em'><a href=https://beyblade-burst.takaratomy.co.jp/>Takara Tomy Beyblade Burst 官方網站</a>將於七月起永久關閉，請盡快下載所需資源！</strong></p>
+<section id="links">
+    <h3>外部連結</h3>
+    <menu>
+        <li><a class=links href="https://beyblade.takaratomy.co.jp/beyblade-x/lineup/">🛍️</a><span>商品詳細</span></li>    
+        <li><a class=links href="https://m.youtube.com/@BEYBLADEOfficialYouTube/videos">🎞️</a><span>影片頻道</span></li>    
+        <li><a class=links href="https://beyblade.takaratomy.co.jp/anime/">📺</a><span>動畫資訊</span></li>    
+        <li><a class=links href="https://beyblade.takaratomy.co.jp/#movie">📔</a><span>綜合消息</span></li>    
+        <li><a class=links href="https://twitter.com/beyblade_info">🌏</a><span>Twitter<small>綜合</small></span></li>    
+        <li><a class=links href="https://twitter.com/tbh_pr">🛠️</a><span>Twitter<small>開發</small></span></li>    
+    </menu>    
+    <div data-beys="01,02,03,04,BXG-01">
+        <h4>陀螺實物</h4>
+    </div>
+    <small>※BX-01 及 02 已在 6 月 10 日於日本活動先行發售</small>
+    <p style="font-size:.8em"><a href=https://beyblade-burst.takaratomy.co.jp/>Takara Tomy Beyblade Burst 官方網站</a>將於七月起永久關閉，請盡快下載所需資源！</p>
+</section>
 
-<article>
-    <a href=https://www.youtube.com/watch?v=ztd9tpZs6dA>商品詳解</a><br>
-    <a href=https://www.youtube.com/@BEYBLADEOfficialYouTube/videos>官方頻道</a>
-</article>
-
-<article>
-    <h2>理念</h2>
-    <img src="https://www.4gamer.net/games/999/G999905/20230517075/SS/005.jpg">
-    <p>
-        Beyblade——能改造的對戰專用陀螺——誕生 24 年後，步入第四世代。本代 Takara Tomy 致力把 Beyblade 包裝成全新形象：不只玩家本身樂在其中，觀眾亦會着迷的「Gear sports」。
-        <ruby><rb>陀螺手<rt>Blader</ruby>需要進行
-        <ruby><rb>發射<rt>Shoot</ruby>練習、透過改造能進行各種綿密設定的裝備而習得知識，而提升技量。第四世代 Beyblade X 就是為了令 Beyblade 朝向一項
-        <ruby><rb>競技運動<rt>Sport</ruby>。
-    </p>
-    <img src=https://pbs.twimg.com/media/CkQbt4eUkAAfPG9.jpg:large><br>
-    <q>你有做什麼運動的嗎？</q>
-    <q>Beyblade。</q><br><br>
-</article>
-
-<article>
-    <h2>特色</h2>
-    <img src=https://beyblade.takaratomy.co.jp/beyblade-x/guide/_image/pict4.jpg>
-    <img src=https://takaratomymall.jp/img/goods/5/4904810910596_9aed4fdbed93420fb6e1d247916fa414.jpg>
-    <p>Beyblade X 糅合過往世代特點：第一世代確立的改造性、第二世代金屬為主的碰撞及第三代的爆裂機能，加上新的 gimmick：
-        陀螺下部的齒輪部分與對戰盤的齒條咬合，實現歷代最速的「<ruby><rb>X</rb><rt>Xtreme</rt></ruby> Dash」！（鼓勵平射）</p>
-    <p>基於對戰盤的上下非對稱性，陀螺手需依自身站立的位置、攻防策略、陀螺迴轉方向考慮合適發射著陸點。</p>
-</article>
-
-<article>
-    <h2>結構</h2>
-    <img src=https://beyblade.takaratomy.co.jp/beyblade-x/guide/_image/pict8.jpg>
-    <p><ul><li>Blade：與對手直接接觸的主要部分<li>Ratchet：決定陀螺高度、重心平衡及 Blade 的撞擊位置。被對手撞擊時可能被爆裂<li>Bit：接地面，決定動態、Dash 性能及爆裂抵耐性</ul></p>
-    <p>首個登場的 Ratchet 是 3-60：3 枚刃、60 dmm = 6 cm 高度</p>
-    <img style='width:24%' src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BX01_04@1.png>
-    <img style='width:24%' src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BX02_04@1.png>
-    <img style='width:24%' src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BX03_04@1.png>
-    <img style='width:24%' src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BX04_04@1.png>
-    <p>基本四款 Bit 形狀：攻擊 F (Flat)、平衡 T (Taper)、持久 B (Ball)、防御 N (Needle)。球形與尖形角色對調。Bit 上 Shaft（軸柱）的愈粗，陀螺便愈難被爆裂。</p>
+<section id="products">
+    <h3>最新商品</h3>
+    <div class=limited>
+        <button>查看更多</button>
+    </div>
     <details>
-       <summary>組裝步驟</summary>
-       <img src=inst.png style='max-width:min(40em,100%)'>
-       <ol>
-          <li>先確認 Ratchet 的白色部分（稱作 Ratchet cover）上三角形與＿枚刃的外環（稱作 Ratchet ring）上三角形對齊
-          <li>把 Ratchet cover 與 Blade 底相同形狀部分合上
-          <li>扭動 Ratchet ring 至 L（左迴轉時）或 R（右迴轉時）
-          <li>把 Bit 插入
-       </ol>
-</article>
+        <summary>陀螺解剖</summary>
+     </details>
+</section>
 
-<article>
-    <h2>對戰</h2>
-    <img src=https://beyblade.takaratomy.co.jp/beyblade-x/guide/_image/pict5.jpg>
-    <p>沿用 Burst 代後期得分，Spin Finish 一分、Over 及 Burst Finish 都是兩分，新增 Xtreme Finish 三分，把對手經 Xtreme Zone（紅色部分）擊出就可獲得。先取四分為獲勝。</p>
-</article>
+<section id="prizes">
+    <h3>景品暫存區</h3>
+    <span>未有內容</span>
+</section>
 
-<article>
-    <h2>大會<small>（內容可能只適用於日本）</small></h2>
-    <img src=https://beyblade.takaratomy.co.jp/beyblade-x/event/_image/pict1.png>
-    <p>前稱 G4 至 G1 等級的官方比賽改稱 G3 至 GP（Grand Prix、格蘭披治）級。除小學生的 Regular class 外，新增中學生 Senior class 及小學生以上、不限年齡的 Masters class。
-    <br>B4（BeyBlade Battle Base）是官方的陀螺小組，前稱 wbba。</p>
-    <img style="width:32%" src="https://beyblade.takaratomy.co.jp/beyblade-x/event/_image/gift1.jpg">
-    <img style="width:32%" src="https://beyblade.takaratomy.co.jp/beyblade-x/event/_image/gift2.jpg">
-    <img style="width:32%" src="https://beyblade.takaratomy.co.jp/beyblade-x/event/_image/gift3.jpg">
-    <p>首個 G3 大會獎品是金色版 BX-04。</p>
-</article>
+<section id="points">
+    <h3>積分系統</h3>
+    <span>App 於 7 月 15 日起開於下載</span>
+</section>
 
-<article>
-    <h2>紀錄</h2>
-    <img src=https://beyblade.takaratomy.co.jp/beyblade-x/app/_image/pict03.jpg>
-    <p>一如 Burst 初期，設有專用 App，購買陀螺、參加大會等都有分數。</p>
-    <img src=https://beyblade.takaratomy.co.jp/beyblade-x/app/_image/pict04_pc.jpg>
-    <p>分數可挑戰 Rare Bey Get Battle，有機會獲得陀螺獎品，再嘗 Burst 代當初無限輪迴滋味！首款獎品為 Cobalt Drake 4-60F。</p>
-    <img src=https://beyblade.takaratomy.co.jp/beyblade-x/app/_image/pict06.png>
-    <p>BeyBattle Pass 等同 Burst 的 Beylogger，測量發射力度及次數，換成分數。</p>
-    <details>
-        <summary>使用重點</summary>
-        <p>Coming soon</p>
-    </details>
-</article>
+<details>
+    <summary>剛剛入坑？</summary>
+    <article>
+        <h2>理念</h2>
+        <img src="https://www.4gamer.net/games/999/G999905/20230517075/SS/005.jpg">
+        <p>
+            Beyblade——能改造的對戰專用陀螺——誕生 24 年後，步入第四世代。本代 Takara Tomy 致力把 Beyblade 包裝成全新形象：不只玩家本身樂在其中，觀眾亦會着迷的「Gear sports」。
+            <ruby><rb>陀螺手<rt>Blader</ruby>需要進行
+            <ruby><rb>發射<rt>Shoot</ruby>練習、透過改造能進行各種綿密設定的裝備而習得知識，而提升技量。第四世代 Beyblade X 就是為了令 Beyblade 朝向一項
+            <ruby><rb>競技運動<rt>Sport</ruby>。
+        </p>
+        <img src=https://pbs.twimg.com/media/CkQbt4eUkAAfPG9.jpg:large><br>
+        <q>你有做什麼運動的嗎？</q>
+        <q>Beyblade。</q><br><br>
+    </article>
 
-<article>
-    <h2>動漫</h2>
-    <img src=https://asset.watch.impress.co.jp/img/hbw/docs/1501/134/sub11.jpg>
-    <img src=https://asset.watch.impress.co.jp/img/hbw/docs/1501/134/sub12.jpg>
-    <p>漫畫一如以往於コロコロ連載；動畫則打破過往兩代的春季替更習慣，於今年秋季開始。描繪陀螺變成職業運動的世界。</p>
-    <img style='width:49%' src=https://pbs.twimg.com/media/FwUAFF5aYAA_1KK?format=jpg>
-    <img style='width:49%' src=https://pbs.twimg.com/media/FwUAFF3aMAA1WK0?format=jpg>
-    <img style='width:49%' src=https://pbs.twimg.com/media/FwUAFF4aYAE4JZp?format=jpg>
-    <img style='width:49%' src=https://pbs.twimg.com/media/FwUAFF2aEAUx-gc?format=jpg>
-</article>
+    <article>
+        <h3>特色</h3>
+        <img src=https://beyblade.takaratomy.co.jp/beyblade-x/guide/_image/pict4.jpg>
+        <img src=https://takaratomymall.jp/img/goods/5/4904810910596_9aed4fdbed93420fb6e1d247916fa414.jpg>
+        <p>Beyblade X 糅合過往世代特點：第一世代確立的改造性、第二世代金屬為主的碰撞及第三代的爆裂機能，加上新的 gimmick：
+            陀螺下部的齒輪部分與對戰盤的齒條咬合，實現歷代最速的「<ruby><rb>X</rb><rt>Xtreme</rt></ruby> Dash」！（鼓勵平射）</p>
+        <p>基於對戰盤的上下非對稱性，陀螺手需依自身站立的位置、攻防策略、陀螺迴轉方向考慮合適發射著陸點。</p>
+    </article>
 
-<article>
-    <h2>虛擬</h2>
-    <img src="https://beyblade.takaratomy.co.jp/beyblade-x/news/_image/news230517_3_1.png">
-    <p>元宇宙中也有陀螺玩！預定夏季開始，由創作者在 Roblox 上一同製作空間。</p>
-</article>
+    <article>
+        <h3>結構</h3>
+        <img src=https://beyblade.takaratomy.co.jp/beyblade-x/guide/_image/pict8.jpg>
+        <ul style="list-style: revert;"><li>Blade：與對手直接接觸的主要部分<li>Ratchet：決定陀螺高度、重心平衡及 Blade 的撞擊位置。被對手撞擊時可能被爆裂<li>Bit：接地面，決定動態、Dash 性能及爆裂抵耐性</ul>
+        <p>首個登場的 Ratchet 是 3-60：3 枚刃、60 dmm = 6 cm 高度</p>
+        <img style='width:24%' src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BX01_04@1.png>
+        <img style='width:24%' src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BX02_04@1.png>
+        <img style='width:24%' src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BX03_04@1.png>
+        <img style='width:24%' src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/BX04_04@1.png>
+        <p>基本四款 Bit 形狀：攻擊 F (Flat)、平衡 T (Taper)、持久 B (Ball)、防御 N (Needle)。球形與尖形角色對調。Bit 上的 Shaft（軸柱）愈粗，陀螺便愈難被爆裂。</p>
+        <details>
+        <summary>組裝步驟</summary>
+        <img src=inst.png style='max-width:min(40em,100%)'>
+        <ol style="list-style: revert;">
+            <li>先確認 Ratchet 的白色部分（稱作 Ratchet cover）上三角形與＿枚刃的外環（稱作 Ratchet ring）上三角形對齊
+            <li>把 Ratchet cover 與 Blade 底相同形狀部分合上
+            <li>扭動 Ratchet ring 至 L（左迴轉時）或 R（右迴轉時）
+            <li>把 Bit 插入
+        </ol>
+    </article>
 
-<article>
-   <h2>商品<small>（2023-07-15）</small></h2>
-   <div>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/1/4904810910381_347560a3f0b246d7b9358fbd0c4ca184.jpg>
-         <figcaption>BX-01 攻擊型 Starter：Dran Sword 3-60F</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/1/4904810910398_4b9305d5fb5640e4b1b1226fe97ae701.jpg>
-         <figcaption>BX-02 平衡型 Starter：Hells Scythe 4-60T</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/1/4904810910473_f157eebb69fb4bc288cb57b6caa1e39f.jpg>
-         <figcaption>BX-03 持久型 Starter：Wizard Arrow 4-80B</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/1/4904810910404_d605ab5af2384b8c8aff7ad578fcbfa7.jpg>
-         <figcaption>BX-04 防御型 Starter：Knight Shield 3-80N</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/C/4904810910497_0884904acbc4495bbd0fbf3b8cddb94f.jpg>
-         <figcaption>BX-05：Wizard Arrow 4-80B（03 Booster 版）</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/C/4904810910480_b237e6467c24411b9aa8e37103390960.jpg>
-         <figcaption>BX-06：Knight Shield 3-80N（04 Booster 版）</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/3/4904810910589_7f3f0f7e93364bf382767f77dc08a755.jpg>
-         <figcaption>BX-07 入門對戰盤組合：Start Dash Set（附拉繩發射器）</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/2/4904810910572_247017b5676346f6b757296da3a98d15.jpg>
-         <figcaption>BX-08 三陀螺組合：3on3 Deck Set（02 至 04 異色版）</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/C/4904810905240_ec6a5fdc7eca4431b4d6491f0e56dcb9.jpg>
-         <figcaption>BX-09 積分儀器：BeyBattle Pass</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/L/4904810910596_23ef21bbc0464e6e82ba3578472f089d.jpg>
-         <figcaption>BX-10 對戰盤：Xtreme Stadium</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/C/4904810910787_e02368e0b4d6459583824d5cf68ae9f0.jpg>
-         <figcaption>BX-11 手把：Launcher Grip</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/C/4904810910602_da5050956fb347b796af5c521e4c5dfd.jpg>
-         <figcaption>BX-12 陀螺盒：3on3 Deck Case</figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/C/4904810910503_2701215527d34b7fa8769dec60c10636.jpg>
-         <figcaption>BXG-01 平衡型 Booster：Dranzer Spiral 3-80T<small>（又從 S 代開始復刻！）</small></figcaption>
-      </figure>
-      <figure>
-         <img src=https://takaratomymall.jp/img/goods/5/4904810913009_ee23e657ce1a4fc6a0ae08278e6f40de.jpg>
-         <figcaption>BXG-02 對戰盤：Xtreme Stadium (Light package)</figcaption>
-      </figure>
-   </div>
-   <details>
-      <summary>陀螺解剖</summary>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx01.png>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx02.png>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx03.png>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx04.png>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx05.png>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx06.png>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx07.png>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx08_y.png>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx08_g.png>
-      <img src=https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/detail_bx08_r.png>
-   </details>
-</article>
+    <article>
+        <h3>對戰</h3>
+        <img src=https://beyblade.takaratomy.co.jp/beyblade-x/guide/_image/pict5.jpg>
+        <p>沿用 Burst 代後期得分，Spin Finish 一分、Over 及 Burst Finish 都是兩分，新增 Xtreme Finish 三分，把對手經 Xtreme Zone（紅色部分）擊出就可獲得。先取四分為獲勝。</p>
+    </article>
+
+    <article>
+        <h3>大會<small>（內容可能只適用於日本）</small></h3>
+        <img src=https://beyblade.takaratomy.co.jp/beyblade-x/event/_image/pict1.png>
+        <p>前稱 G4 至 G1 等級的官方比賽改稱 G3 至 GP（Grand Prix、格蘭披治）級。除小學生的 Regular class 外，新增中學生 Senior class 及小學生以上、不限年齡的 Masters class。</p>
+        <img src=https://pbs.twimg.com/media/FyGXxRuaYAAb6qH?format=jpg&name=large>
+        <p>各款比賽勝利獎品。
+        <p>B4（BeyBlade Battle Base）是官方的陀螺小組，前稱 wbba。</p>
+    </article>
+
+    <article>
+        <h3>復刻</h3>
+        <img src=https://hobby.dengeki.com/ss/hobby/uploads/2023/06/DTWcard_dbMLU8dV46qAxUCCYEv-7GCpskopHKva.jpg>
+        <p>「<ruby><rb>X</rb><rt>Cross</rt></ruby> Over Project」：在未來數年，前三代的部分陀螺亦會以 X 代結構再次復剖。</p>
+    </article>
+
+    <article>
+        <h3>紀錄</h3>
+        <img src=https://beyblade.takaratomy.co.jp/beyblade-x/app/_image/pict03.jpg>
+        <p>一如 Burst 初期，設有專用 App，購買陀螺、參加大會等都有分數。</p>
+        <img src=https://beyblade.takaratomy.co.jp/beyblade-x/app/_image/pict04_pc.jpg>
+        <p>分數可挑戰 Rare Bey Get Battle，有機會獲得陀螺獎品，再嘗 Burst 代當初無限輪迴滋味！首款獎品為 Cobalt Drake 4-60F。</p>
+        <img src=https://beyblade.takaratomy.co.jp/beyblade-x/app/_image/pict06.png>
+        <p>BeyBattle Pass 等同 Burst 的 Beylogger，測量發射力度及次數，換成分數。</p>
+    </article>
+</details>
 
 <script>
 Promise.all([
@@ -307,8 +175,8 @@ Promise.all([
     document.cookie.split(/;\s?/).forEach(c => document.cookie = c.replace(/=.*/, `=; max-age=0; path=/`))
 ]).catch(er => console.error(er));
    
-document.querySelector('header video').src = Math.random() > .5 ? 'trailer.mp4' : 'https://beyblade.takaratomy.co.jp/_image/logocut_edit_PV_1_email480.mp4';
-document.querySelector('input').onkeypress = ev => {
+Q('header video').src = Math.random() > .5 ? 'trailer.mp4' : 'https://beyblade.takaratomy.co.jp/_image/logocut_edit_PV_1_email480.mp4';
+Q('input').onkeypress = ev => {
     if ((ev.keyCode || ev.which) != 13) return;
     if (/^i#.+$/.test(ev.target.value))
         return location.href = `https://instagram.com/explore/tags/${/(?<=#).+/.exec(ev.target.value)}`;
@@ -318,4 +186,130 @@ document.querySelector('input').onkeypress = ev => {
         return location.href = `https://twitter.com/hashtag/${/(?<=#).+/.exec(ev.target.value)}/?f=live`;
     return location.href = `https://${ev.target.value}`;
 }
+
+const beys = {
+    "2023-08-10": [
+        {
+            code: 'BX-13',
+            prod: 'Booster', type: 'D',
+            img: 'https://scontent-mrs2-2.xx.fbcdn.net/v/t1.15752-9/348379735_801996341282461_6432448877209794057_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=DYxhPs--z3kAX9leRGF&_nc_ht=scontent-mrs2-2.xx&oh=03_AdQqRl3TktQdsHmtrHIqr07g_A5v5hWdYeYh8yydn50ApQ&oe=64AB7F62'
+        }
+    ],
+    "2023-07-15": [
+        {
+            code: 'BX-01',
+            prod: 'Starter', type: 'A r',
+            jap: 'ドランソード3-60F', eng: 'Dran Sword 3-60F'
+        },
+        {
+            code: 'BX-02',
+            prod: 'Starter', type: 'B r',
+            jap: 'ヘルズサイズ4-60T', eng: 'Hells Scythe 4-60T'
+        },
+        {
+            code: 'BX-03',
+            prod: 'Starter', type: 'S r',
+            jap: 'ウィザードアロー4-80B', eng: 'Wizard Arrow 4-80B'
+        },
+        {
+            code: 'BX-04',
+            prod: 'Starter', type: 'D r',
+            jap: 'ナイトシールド3-80N', eng: 'Knight Shield 3-80N'
+        },
+        {
+            code: 'BX-05',
+            prod: 'Booster', type: 'S r',
+            jap: 'ウィザードアロー4-80B', eng: 'Wizard Arrow 4-80B',
+            desc: '03 異色 Booster 版'
+        },
+        {
+            code: 'BX-06',
+            prod: 'Booster', type: 'D r',
+            jap: 'ナイトシールド3-80N', eng: 'Knight Shield 3-80N',
+            desc: '04 異色 Booster 版'
+        },
+        {
+            code: 'BX-07',
+            prod: 'Set',
+            jap: 'スタートダッシュセット', eng: 'Start Dash Set',
+            desc: '含拉線發射器'
+        },
+        {
+            code: 'BX-08', dissect: ['bx08_r', 'bx08_g', 'bx08_y'],
+            prod: 'Set',
+            jap: '3on3デッキセット', eng: '3on3 Deck Set',
+            desc: '異色版 02~04'
+        },
+        {
+            code: 'BX-09',
+            jap: 'ベイバトルパス', eng: 'Bey Battle Pass',
+            desc: '測量、記錄發射次數力度，並換成分數'
+        },
+        {
+            code: 'BX-10',
+            jap: 'エクストリームスタジアム', eng: 'Xtreme Stadium',
+        },
+        {
+            code: 'BX-11',
+            jap: 'ランチャーグリップ', eng: 'Launcher Grip',
+            desc: '發射器手把'
+        },
+        {
+            code: 'BX-12',
+            jap: '3on3デッキケース', eng: '3on3 Deck Case',
+            desc: '3on3 對戰用陀螺盒'
+        },
+        {
+            code: 'BXG-01',
+            prod: 'Booster', type: 'B r',
+            jap: 'ドランザースパイラル3-80T', eng: 'Dranzer Spiral 3-80T',
+        },
+        {
+            code: 'BXG-02',
+            img: `https://takaratomymall.jp/img/goods/5/4904810913009_ee23e657ce1a4fc6a0ae08278e6f40de.jpg`,
+            jap: 'エクストリームスタジアム ライトパッケージ', eng: 'Xtreme Stadium Light Package',
+        },
+    ]
+}
+    
+const listProducts = beys => {
+    let base = 'https://beyblade.takaratomy.co.jp/beyblade-x/lineup/_image/';
+    Object.entries(beys).forEach(([date, beys]) => {
+        let figures = beys.map(b => E.figure({
+            classList: b.type ?? '',
+            imgs: b.img ?? `${base}${b.code.replace('-', '')}@1.png`,
+            caption: E.dl({
+                [`${b.code}${b.prod ? ` ${b.prod}` : ''}`]: [b.eng ?? '', ...(b.desc ?? '').split('//')]
+            }).outerHTML
+        }));
+        Q('#products div').append(E('time', {textContent: date}), ...figures);
+
+        let imgs = beys.filter(b => b.prod).flatMap(b => b.dissect ?? b.code.replace('-', '').toLowerCase())
+            .map(code => E('img', {src: `${base}detail_${code}.png`}));
+        Q('#products summary').onclick = () => Q('#products details img') || Q('#products details').append(...imgs);
+    });
+    Q('[data-beys] h4').after(...Q('[data-beys]').getAttribute('data-beys').split(',').map(b => E('a', {
+        textContent: b = b.replace(/^(?!BX)/, 'BX-'),
+        href: `https://www.youtube.com/results?search_query=${Object.values(beys).flat().find(({code}) => b == code)?.jap}+-yuki&sp=CAI%253D`,
+        style: {
+            background: `
+            url(${base}${b.replace('-','')}_list.png) no-repeat left / contain,
+            linear-gradient(to right,var(--theme) var(--stop),transparent var(--stop))`
+        },
+    })));
+}
+const waitImages = () =>
+    Promise.all([...document.images].filter(img => !img.complete).map(img => new Promise(res => {
+        img.onload = res;
+        img.onerror = ev => res(ev.target.matches('figure img') ? ev.target.replaceWith(E('i', {classList: 'no-img'})) : ev.target.remove());
+    })));
+const showMore = () => 
+    Q('.limited button', button => {
+        let div = button.parentElement;
+        div.scrollHeight > div.clientHeight ? 
+            button.onclick = () => (div.style.maxHeight = 'initial') && button.remove() : 
+            button.remove();
+    });
+
+fetch('beys.json').then(resp => resp.json()).catch(() => beys).then(listProducts).then(waitImages).then(showMore).catch(er => console.error(er));
 </script>
