@@ -226,6 +226,6 @@ const showMore = () =>
     });
 
 fetch('beys.json').then(resp => resp.json()).catch(() => beys).then(listProducts).then(waitImages).then(showMore).catch(er => console.error(er));
-const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.target.classList.toggle('seeing', entry.isIntersecting)));
-Q('section', section => observer.observe(section));
+const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.target.parentElement.classList.toggle('seeing', entry.isIntersecting)));
+Q('section h3+*', content => observer.observe(content));
 </script>
