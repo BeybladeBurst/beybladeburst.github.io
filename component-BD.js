@@ -4,29 +4,29 @@ customElements.define('bird-diverter', class extends HTMLElement {
         this.attachShadow({ mode: 'open' }).innerHTML = `
         <style>
         :host {
-            perspective:100em; transform-style:preserve-3d;
+            transform-style:preserve-3d;
             margin-top:1em;
             transform-origin:center -3em; transform:rotate(var(--tilt));
         }
         article {
+            perspective:100em;
             width:10em; height:17.5em;
             transform-style:inherit;
-            transform:rotateY(var(--angle)); --angle:0deg; will-change:transform;
         }
         div {
             width:100%; height:100%;
             position:absolute;
             border-top-left-radius:1em; border-top-right-radius:1em;
             background:#e3e5ec;
-            transform-style:inherit;
+            transform-style:inherit; will-change:transform;
             --dark-s:.3em; --light-s:.15em;
         }
         div:first-child {
-            transform:translateZ(.1px);
+            transform:rotateY(var(--angle)) translateZ(.1px);
             --dark-c:#a0c900; --light-c:#dfed04;
         }
         div:last-child {
-            transform:rotateY(180deg);
+            transform:rotateY(var(--angle) + 180deg);
             --dark-c:#f74608; --light-c:#fd5a1b;
         }
         svg {
@@ -68,12 +68,12 @@ customElements.define('bird-diverter', class extends HTMLElement {
             --ani:dim; will-change:filter;
         }
         article::before,article::after {
-            top:-1.8em; transform:translateX(-50%) rotateY(89deg);
+            top:-1.8em; transform:translateX(-50%) rotateY(calc(var(--angle) + 89deg));
             width:2em; height:2em;
             border-radius:9em; border:.2em solid gray;
             --ani:dim; will-change:filter;
         }
-        article::after {transform:translatXe(-50%) rotateY(91deg);}
+        article::after {transform:translateX(-50%) rotateY(calc(var(--angle) + 91deg));}
         div::before,div::after {
             top:.9em; transform:translate(-50%,-50%);
             width:1em; height:1em;
