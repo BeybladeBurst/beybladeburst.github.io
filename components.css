@@ -1,7 +1,7 @@
 input[type=range],::-webkit-slider-thumb,progress,meter {
     appearance:none;
 }
-meter::-webkit-meter-bar { /*safari*/
+::-webkit-meter-bar,::-webkit-meter-optimum-value { /*safari*/
     background:none;
 }
 .knob input {
