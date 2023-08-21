@@ -1,6 +1,9 @@
 input[type=range],::-webkit-slider-thumb,progress,meter {
     appearance:none;
 }
+meter::-webkit-meter-bar { /*safari*/
+    background:none;
+}
 .knob input {
     display:none;
 }
