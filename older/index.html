@@ -1,0 +1,43 @@
+<!doctype html>
+<title>Temp</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<link rel=stylesheet href='common.css'>
+<style>
+nav {
+  font-size:1.5em;
+}
+nav a {
+  display:block;
+  text-decoration:none;
+  width:17em;
+  padding:.2em .5em .2em 3em;margin:2em auto;
+  background:white;
+  color:var(--theme);
+  text-align:left;
+  position:relative;
+  border-radius:9em;
+  transition:background .5s,border-color .5s,color .5s;
+}
+nav a:hover {
+  background:var(--theme);
+  color:white;
+}
+nav a::before {
+  content:'';
+  position:absolute;left:-.3em;top:50%;transform:translate(0,-50%);
+  width:3em;height:3em;
+  border-radius:5em;border:.15em solid white;
+  background:var(--theme-bg);
+  transition:background .5s,border-color .5s,color .5s;
+}
+nav a:hover::before {
+  border-color:var(--theme);
+  background:white;
+}
+</style>
+<nav>
+  <a href='platonic.html'>Platonic & Archimedean solids</a>
+  <a href='antiprism.html'>Antiprism</a>
+  <a href='disk.html'>Colored disks</a>
+</nav>
