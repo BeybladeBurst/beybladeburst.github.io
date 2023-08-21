@@ -18,15 +18,16 @@ customElements.define('bird-diverter', class extends HTMLElement {
             position:absolute;
             border-top-left-radius:1em; border-top-right-radius:1em;
             background:#e3e5ec;
+            backface-visibility:hidden;
             transform-style:inherit; will-change:transform;
             --dark-s:.3em; --light-s:.15em;
         }
         div:first-child {
-            transform:rotateY(var(--angle)) translateZ(.1px);
+            transform:rotateY(var(--angle));
             --dark-c:#a0c900; --light-c:#dfed04;
         }
         div:last-child {
-            transform:rotateY(var(--angle) + 180deg);
+            transform:rotateY(calc(var(--angle) + 180deg));
             --dark-c:#f74608; --light-c:#fd5a1b;
         }
         svg {
