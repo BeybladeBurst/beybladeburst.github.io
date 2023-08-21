@@ -105,6 +105,9 @@ h2 {
     min-width:3em; max-width:5em;
     position:relative; color:transparent;
 }
+@media not all and (min-resolution:.001dpcm) { @media {
+    h2 {font-weight:normal;}
+}}
 h2::before,h2::after {
     content:attr(title);
     position:absolute; left:0; top:0;
