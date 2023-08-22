@@ -100,14 +100,11 @@ dt+dd+dd {
     margin-bottom:.1em;
 }
 h2 {
-    font-size:2em; font-weight:bold; text-align:right;
+    font-size:2em; text-align:right;
     margin:-.2em .4em 0 0;
     min-width:3em; max-width:5em;
     position:relative; color:transparent;
 }
-@media not all and (min-resolution:.001dpcm) { @media {
-    h2 {font-weight:normal;}
-}}
 h2::before,h2::after {
     content:attr(title);
     position:absolute; left:0; top:0;
