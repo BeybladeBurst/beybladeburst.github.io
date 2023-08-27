@@ -22,6 +22,7 @@ Promise.all([
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
 <title>About me</title>
 
+<body hidden>
 <header>
     <div>
         <h1>VEIGA</h1>
@@ -145,9 +146,10 @@ Promise.all([
         <h2>THANK YOU</h2>
     </div>
 </section>
+</body>
         
-
 <script>
+    customElements.whenDefined('great-icosahedron').then(() => Q('body').hidden = false);
     (observer => Q('meter,progress', el => observer.observe(el, {attributes: true, attributeFilter: ['value']})))(
         new MutationObserver(([{target}]) => target.style.setProperty('--value', target.value))
     );
