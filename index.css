@@ -100,7 +100,7 @@ dt+dd+dd {
     margin-bottom:.1em;
 }
 h2 {
-    font-size:2em; text-align:right;
+    font-size:2em; text-align:right; font-weight:bold;
     margin:-.2em .4em 0 0;
     min-width:3em; max-width:5em;
     position:relative; color:transparent;
