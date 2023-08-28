@@ -21,7 +21,7 @@ const Knob = {
         knob.minθ = parseInt(getComputedStyle(knob).getPropertyValue('--min'));
         knob.maxθ = 360 - knob.minθ;
         knob.currentθ = () => parseFloat(getComputedStyle(knob).getPropertyValue('--angle'));
-        knob.onpointerdown = ev => Knob.press(ev)
+        knob.onpointerdown = ev => Knob.press(ev);
     },
     press: ({ target: knob, clientY }) => {
         knob.startY = clientY;
@@ -58,19 +58,22 @@ const Fader = {
         pillar.style.setProperty('--w-size', 5.5 - input.tabIndex + 1 + '%');
         
         input.oninput = ev => Fader.move(input, pillar);
-        input.dispatchEvent(new InputEvent('input'));
+        input.onpointerup = ev => Fader.confirm();
+        setTimeout(() => input.dispatchEvent(new InputEvent('input')));
     },
     move: (input, pillar) => {
         pillar.style.setProperty('--w-pos', 100 - input.value + '%');
         input.style.setProperty('--value', input.value);
-        let until = Q('#faders p').findIndex(p => {
-            let pos = parseFloat(getComputedStyle(p).getPropertyValue('--w-pos'));
-            let size = parseFloat(getComputedStyle(p).getPropertyValue('--w-size'));
-            return pos < 10 - (2*size/5 - .4) || pos > 10 + (2*size/5 - .4);
-        }) + 1;
+        let until = Fader.penetrated();
         Q('#faders').style.setProperty('--laser', 
             (until === 0 ? 5000 : Q(`#faders p:nth-child(${until})`).getBoundingClientRect().x) + 'px');
-    }
+    },
+    confirm: () => Q('#faders').classList.toggle('done', Fader.penetrated() === 0),
+    penetrated: () => Q('#faders p').findIndex(p => {
+        let pos = parseFloat(getComputedStyle(p).getPropertyValue('--w-pos'));
+        let size = parseFloat(getComputedStyle(p).getPropertyValue('--w-size'));
+        return pos < 10 - (2*size/5 - .35) || pos > 10 + (2*size/5 - .35);
+    }) + 1
 }
 const BD =  {
     init: diverter => {

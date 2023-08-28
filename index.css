@@ -165,6 +165,10 @@ h3 b:last-of-type {
     overflow:hidden;
     user-select:none;
     --base-bg:hsl(60,50%,15%);
+    --light:hsl(var(--hue),100%,60%);
+}
+#faders.done {
+    transition:--hue 1s; --hue:1970;
 }
 #faders em {
     position:absolute; left:160%; top:5%;
@@ -191,6 +195,21 @@ h3 b:last-of-type {
     justify-self:center;
     transform:translateY(var(--y,0));
     z-index:1;
+}
+@property --hue {
+    syntax:'<number>';
+    inherits:true;
+    initial-value:170;
+}
+#faders:not(.done) b {display:none;}
+#faders b {
+    position:absolute; left:50%; top:65%; transform:translateX(-50%);
+    font-size:1.5em; text-align:center;
+    background:#00000088;
+    width:100%;
+    padding:1em .5em;
+    pointer-events:none;
+    color:hsl(var(--hue),100%,60%); text-shadow:0 0 .25em hsl(var(--hue),100%,60%);
 }
 
 #bd {
