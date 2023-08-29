@@ -117,9 +117,9 @@ meter {
     width:5em; height:5em;
     --until:330deg;
     background:conic-gradient(white,
-        hsl(200,80%,60%),hsl(180,80%,60%),hsl(160,80%,60%),
-        hsl(140,80%,60%),hsl(110,80%,60%),hsl(80,80%,60%),
-        hsl(60,80%,60%),hsl(50,80%,60%),hsl(40,80%,60%),
+        hsl(200,80%,60%),hsl(170,80%,60%),hsl(140,80%,60%),
+        hsl(110,80%,60%),hsl(80,80%,60%),hsl(65,80%,60%),
+        hsl(50,80%,60%),hsl(40,80%,60%),hsl(30,80%,60%),
         hsl(20,80%,60%),hsl(0,80%,60%),hsl(-20,80%,60%),
         hsl(-40,80%,60%) var(--until),gray var(--until) 360deg);
     border-radius:50%; border:.15rem inset silver;
