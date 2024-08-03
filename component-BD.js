@@ -132,6 +132,6 @@ customElements.define('bird-diverter', class extends HTMLElement {
         </article>`;
     }
     connectedCallback() {
-        this.shadowRoot.querySelector('article').append(this.shadowRoot.querySelector('div').cloneNode(true));
+        this.shadowRoot.Q('article').append(this.shadowRoot.Q('div').cloneNode(true));
     }
 });

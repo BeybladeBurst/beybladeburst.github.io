@@ -44,14 +44,12 @@ class Polygon {
         return points;
     }
     static viewBox(svgs, {stroke}) {
-        svgs.forEach(svg => svg.setAttribute('viewBox', [-1,-1,2,2].map(
+        svgs.forEach(svg => E(svg, {viewBox: [-1,-1,2,2].map(
             (gon => m => m * gon.radius.stroked)(new Polygon(svg.classList[0].split('-')[0], stroke))
-        ).join(' ')));
+        ).join(' ')}));
     }
     polygon() {
-        let polygon = E('polygon');
-        polygon.setAttribute('points', Polygon.points(this.n));
-        return polygon;
+        return E('polygon', {points: Polygon.points(this.n)});
     }
     svg = () => E('svg', [this.polygon()], {classList: `${this.n}-gon`});
 }

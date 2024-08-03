@@ -2,15 +2,20 @@ const Q = Node.prototype.Q = function(el, func) {
     let els = this.querySelectorAll?.(el) ?? document.querySelectorAll(el);
     return func ? els.forEach(func) : els.length > 1 ? [...els] : els[0];
 }
-const E = (el, stuff1, stuff2) => {
-    attr = typeof stuff1 == 'string' ? {textContent: stuff1, ...stuff2} : Array.isArray(stuff1) ? stuff2 : stuff1;
-    el == 'img' && (attr = {alt: 'image', ...attr ?? {}});
-    el = ['svg', 'path', 'line', 'polygon', 'rect', 'circle'].includes(el) ? 
-        document.createElementNS('http://www.w3.org/2000/svg', el) :
-        document.createElement(el);
-    Array.isArray(stuff1) && el.append(...stuff1);
+const E = (el, ...stuff) => {
+    let SVGs = ['svg', 'defs', 'use', 'path', 'line', 'polygon', 'rect', 'circle', 'animate'];
+    let [text, attr, child] = ['String', 'Object', 'Array'].map(t => stuff.find(s => Object.prototype.toString.call(s).includes(t)));
+    text && (attr = {textContent: text, ...attr ?? {}});
+    el == 'img' && (attr &&= {alt: attr.src.match(/([^/.]+)(\.[^/.]+)$/)?.[1], onerror: ev => ev.target.remove(), ...attr ?? {}});
+    el = Object.prototype.toString.call(el).includes('Element') ? el : 
+        SVGs.includes(el) ? document.createElementNS('http://www.w3.org/2000/svg', el) : document.createElement(el);
+    el.append(...child ?? []);
     Object.assign(el.style, attr?.style ?? {});
-    return Object.assign(el, (({style, ...attr}) => attr)(attr ?? {}));
+    Object.assign(el.dataset, attr?.dataset ?? {});
+    SVGs.includes(el.tagName) ? 
+        Object.entries(attr ?? {}).forEach(([a, v]) => el.setAttribute(a, v)) : 
+        Object.assign(el, (({style, ...attr}) => attr)(attr ?? {}));
+    return el;
 }
 CSSStyleDeclaration.prototype.variables = function(obj) {
     Object.entries(obj).forEach(([p, v]) => this.setProperty(`--${p}`, v));
@@ -133,4 +138,50 @@ Drums.playback.stop = function() {
 Drums.playback.set = function(piece, on, time) {
     Q(`#${piece}`).classList[on ? 'add':'remove']('on');
     Drums.lastHit[piece] = on ? time : null;
+}
+const Scroll = {
+    inited: false,
+    init: () => {
+        Q('#drum h2').onclick = () => {
+            Q('aside').hidden = false;
+            if (!Scroll.inited) {
+                Scroll.inited = true;
+                Q('style:empty').textContent = ['slant','midSlant','inR'].map(p => `@property --${p} {syntax:'<number>'; inherits:true; initial-value:1;}`).join('');
+                Scroll.truncated = [];
+                Scroll.merge(6,8);
+                Scroll.merge(12,20);
+                onscroll = () => {
+                    let progress = Q('html').scrollTop/(Q('html').scrollHeight-Q('html').clientHeight);
+                    progress <= .5  && !Scroll.truncated[0] && Scroll.truncate(0);
+                    progress <= .15 && !Scroll.truncated[1] && Scroll.truncate(1);
+                }
+            }
+        }
+        Q('aside').onclick = () => Q('aside').hidden = true;
+    },
+    truncate: which => {
+        Scroll.truncated[which] = true;
+        Q(`aside div:nth-of-type(${which+1}) hedron-p`).shadowRoot.Q('polygon', polygon => {
+            let side = parseInt(polygon.id), stroke = parseFloat(polygon.getAttribute('stroke'));
+            const r = new Polygon(side, stroke).normal;
+            const strokeAdjusted = r - (new Polygon(side, stroke, r).radius.stroked - r);
+            const points = Polygon.points(side, strokeAdjusted, -Math.PI / side, true);
+    
+            const animate = polygon.Q(`animate`);
+            E(animate, {
+                from: animate.getAttribute('to') || animate.parentNode.getAttribute('points'),
+                to: points
+            });
+            E(animate.parentNode, {points});
+            animate.beginElement();
+        });
+    },
+    merge: (transfer, receive) => {
+        let [trS, reS] = [Q(`hedron-p[face="${transfer}"]`), Q(`hedron-p[face="${receive}"]`)].map(hedron => hedron.shadowRoot);
+        [trS, reS].forEach(shadow => E(shadow.Q('polygon'), {stroke: shadow.host.stroke}));
+        reS.Q('figure').style.fontSize = reS.host.getAttribute('scale') + 'em';
+        reS.append(trS.Q('figure'), trS.Q('style[id]'), trS.host.parentElement.Q('style').cloneNode(true));
+        reS.Q('defs').append(trS.Q('defs>*'));
+        trS.host.remove();
+    }  
 }

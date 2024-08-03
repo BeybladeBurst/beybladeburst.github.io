@@ -2,9 +2,10 @@
 <title>Platonic</title>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width, initial-scale=1.0">
+<script src='../index.js'></script>
 <script src='common.js'></script>
 <link rel=stylesheet href='common.css'>
-<script src='platonic.js'></script>
+<script src='../platonic.js'></script>
 <style>
 form {
     display:grid;grid-template:3em 3em 3em/ 4rem 4rem 1fr;gap:.5em;
@@ -246,7 +247,7 @@ const Polyhedra = {
                 const r = new Gon(hedron.side, hedron.stroke).normal;
                 const strokeAdjusted = r - (new Gon(hedron.side, hedron.stroke, r).strokedR - r);
                 points = Gon.points(hedron.side, strokeAdjusted, -Math.PI/hedron.side, true);
-                hedron.figure.style.setProperty('--edge', new Gon(hedron.side, hedron.stroke, strokeAdjusted).side);
+                hedron.edge = new Gon(hedron.side, hedron.stroke, strokeAdjusted).side;
                 Polyhedra.setName(h3, ['A7','A7','A6','A6','P3'][i]);
             }
             const animate = hedron.shadow.querySelector(`[id='${hedron.side}'] animate`);
@@ -272,7 +273,9 @@ const Polyhedra = {
         clone.removeAttribute('face');
         slot.insertAdjacentElement('afterbegin', clone);
         
-        let [trS, reS] = [Q(`hedron-p[face="${transfer}"]`), Q(`hedron-p[face="${receive}"]`)].map(hedron => hedron.shadowRoot);
+        let [trS, reS] = [Q(`hedron-p[face="${transfer}"]`), Q(`hedron-p[face="${receive}"]`)];
+        const scaled = reS.edge / trS.edge;
+        [trS, reS] = [trS, reS].map(hedron => hedron.shadowRoot);
         let cloneS = clone.shadowRoot;
         cloneS.innerHTML += trS.querySelector('figure').outerHTML;
         
@@ -282,7 +285,6 @@ const Polyhedra = {
     
         [trS, reS] = [trS, reS].map(shadow => shadow.querySelector('figure').style);
         const diameter = reS.getPropertyValue('--diameter').replace('em','');
-        const scaled = reS.getPropertyValue('--edge') / trS.getPropertyValue('--edge');
         cloneS.querySelector('figure+figure').style.setProperty('--diameter', diameter * scaled + 'em');
         
         if (Q('#full:checked'))
