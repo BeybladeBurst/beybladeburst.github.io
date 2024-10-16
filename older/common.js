@@ -21,7 +21,7 @@ String.prototype.setCSS = function(css) {Q('style').insertAdjacentHTML('beforeen
 const cookie = document.cookie.split(/;\s?/).map(o => o.split('=')).reduce( (obj, [k,v]) => ({...obj, [k]:v}) , {});
 const parameter = new URL(window.location.href).search.substring(1).split('&').map(o => o.split('=')).reduce( (obj, [k,v]) => ({...obj, [k]:v}) , {});
 
-class Polygon {
+typeof Polygon == 'undefined' && (Polygon = class {
     constructor(n, stroke = 0, r = 1) {
         this.n = n, this.stroke = stroke, this.r = r;
 
@@ -52,4 +52,4 @@ class Polygon {
         return E('polygon', {points: Polygon.points(this.n)});
     }
     svg = () => E('svg', [this.polygon()], {classList: `${this.n}-gon`});
-}
+})
