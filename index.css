@@ -109,7 +109,7 @@ h2 {
     min-width:3em; max-width:5em;
     position:relative; color:transparent;
 
-    .ios & {text-spacing:-.05em;}
+    .ios & {latter-spacing:-.05em;}
 }
 h2::before,h2::after {
     content:attr(title);
