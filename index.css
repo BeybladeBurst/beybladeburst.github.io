@@ -25,6 +25,7 @@ html {
     --base-bg:#152211;
     background:var(--base-bg);
     position:relative;
+    -webkit-font-smoothing: antialiased;
 }
 html.dragging {touch-action:none;}
 body>*:not(.seeing),.blurred {
