@@ -20,7 +20,6 @@ const E = (el, ...stuff) => {
 CSSStyleDeclaration.prototype.variables = function(obj) {
     Object.entries(obj).forEach(([p, v]) => this.setProperty(`--${p}`, v));
 };
-/iPad|iPhone/.test(navigator.userAgent) && document.body.classList.add('ios');
 
 const Knob = {
     init: knob => {
