@@ -206,6 +206,7 @@ setTimeout(() => location.hash != '#stay' && (location.href='https://beyblade-ex
 </aside>
 
 <script>
+    /iPad|iPhone/.test(navigator.userAgent) && document.body.classList.add('ios');
     customElements.whenDefined('great-icosahedron').then(() => Q('body').hidden = false);
     (observer => Q('meter,progress', el => observer.observe(el, {attributes: true, attributeFilter: ['value']})))(
         new MutationObserver(([{target}]) => target.style.setProperty('--value', target.value))
