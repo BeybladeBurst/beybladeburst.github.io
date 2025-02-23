@@ -1,34 +1,11 @@
-const Q = Node.prototype.Q = function(el, func) {
-    let els = this.querySelectorAll?.(el) ?? document.querySelectorAll(el);
-    return func ? els.forEach(func) : els.length > 1 ? [...els] : els[0];
-}
-const E = (el, ...stuff) => {
-    let SVGs = ['svg', 'defs', 'use', 'path', 'line', 'polygon', 'rect', 'circle', 'animate'];
-    let [text, attr, child] = ['String', 'Object', 'Array'].map(t => stuff.find(s => Object.prototype.toString.call(s).includes(t)));
-    text && (attr = {textContent: text, ...attr ?? {}});
-    el == 'img' && (attr &&= {alt: attr.src.match(/([^/.]+)(\.[^/.]+)$/)?.[1], onerror: ev => ev.target.remove(), ...attr ?? {}});
-    el = Object.prototype.toString.call(el).includes('Element') ? el : 
-        SVGs.includes(el) ? document.createElementNS('http://www.w3.org/2000/svg', el) : document.createElement(el);
-    el.append(...child ?? []);
-    Object.assign(el.style, attr?.style ?? {});
-    Object.assign(el.dataset, attr?.dataset ?? {});
-    SVGs.includes(el.tagName) ? 
-        Object.entries(attr ?? {}).forEach(([a, v]) => el.setAttribute(a, v)) : 
-        Object.assign(el, (({style, ...attr}) => attr)(attr ?? {}));
-    return el;
-}
-CSSStyleDeclaration.prototype.variables = function(obj) {
-    Object.entries(obj).forEach(([p, v]) => this.setProperty(`--${p}`, v));
-};
-
 const Knob = {
-    init: knob => {
-        knob.minθ = parseInt(getComputedStyle(knob).getPropertyValue('--min'));
+    init (knob) {
+        knob.minθ = new E(knob).get('--min');
         knob.maxθ = 360 - knob.minθ;
-        knob.currentθ = () => parseFloat(getComputedStyle(knob).getPropertyValue('--angle'));
+        knob.currentθ = () => new E(knob).get('--angle');
         knob.onpointerdown = ev => Knob.press(ev);
     },
-    press: ({ target: knob, clientY }) => {
+    press ({ target: knob, clientY }) {
         knob.startY = clientY;
         knob.startθ = knob.currentθ();
 
@@ -36,7 +13,7 @@ const Knob = {
         document.onpointermove = ev => Knob.drag(ev, knob);
         document.onpointerup = ev => Knob.lift(knob);
     },
-    drag: (ev, knob) => {
+    drag (ev, knob) {
         ev.preventDefault();
         let currentθ = knob.currentθ();
         (currentθ == knob.minθ || currentθ == knob.maxθ) && (knob.startθ = currentθ);
@@ -44,53 +21,51 @@ const Knob = {
         let currentY = ev.clientY;
         let updatedθ = Math.max(knob.minθ, Math.min(knob.startθ - (currentY - knob.startY), knob.maxθ));
         (updatedθ == knob.minθ || updatedθ == knob.maxθ) && (knob.startY = currentY);
-        knob.style.setProperty('--angle', `${updatedθ}deg`);
+        new E.prop({'--angle': `${updatedθ}deg`}).apply(knob);
 
         let value = (updatedθ - knob.minθ) / (knob.maxθ - knob.minθ);
         knob.Q('input').value = Q(`progress`).value = value;
-        Q(`progress`).parentElement.style.setProperty('--value', value);
+        new E.prop({'--value': value}).apply(Q(`progress`).parentElement);
     
     },
-    lift: knob => {
+    lift (knob) {
         Q('html').classList.remove('dragging');
         document.onpointermove = null;
     }
 };
 const Fader = {
-    init: input => {
+    init (input) {
         input.value = Math.random()*100;
-        let pillar = Q(`#faders p:nth-child(${input.tabIndex})`)
-        pillar.style.setProperty('--w-size', 5.5 - input.tabIndex + 1 + '%');
+        let pillar = Q(`#faders p:nth-child(${input.tabIndex})`);
+        new E.prop({'--w-size': 5.5 - input.tabIndex + 1 + '%'}).apply(pillar);
         
         input.oninput = ev => Fader.move(input, pillar);
         input.onpointerup = ev => Fader.confirm();
         setTimeout(() => input.dispatchEvent(new InputEvent('input')));
     },
-    move: (input, pillar) => {
-        pillar.style.setProperty('--w-pos', 100 - input.value + '%');
-        input.style.setProperty('--value', input.value);
+    move (input, pillar) {
+        new E.prop({'--w-pos': 100 - input.value + '%'}).apply(pillar);
+        new E.prop({'--value': input.value}).apply(input);
         let until = Fader.penetrated();
-        Q('#faders').style.setProperty('--laser', 
-            (until === 0 ? 5000 : Q(`#faders p:nth-child(${until})`).getBoundingClientRect().x) + 'px');
+        new E.prop({'--laser': until === 0 ? '5000px' : Q(`#faders p:nth-child(${until})`).getBoundingClientRect().x+'px'}).apply(Q('#faders'));
     },
     confirm: () => Q('#faders').classList.toggle('done', Fader.penetrated() === 0),
     penetrated: () => Q('#faders p').findIndex(p => {
-        let pos = parseFloat(getComputedStyle(p).getPropertyValue('--w-pos'));
-        let size = parseFloat(getComputedStyle(p).getPropertyValue('--w-size'));
+        let [pos, size] = new E(p).get('--w-pos', '--w-size');
         return pos < 10 - (2*size/5 - .35) || pos > 10 + (2*size/5 - .35);
     }) + 1
 }
 const BD =  {
-    init: diverter => {
-        BD.diverter = diverter.shadowRoot.Q('article');
+    init (diverter) {
+        BD.diverter = diverter.sQ('article');
         BD.control = Q('#knob input'), BD.meter = Q('meter');
     },
-    get angle() {return parseFloat(getComputedStyle(BD.diverter).getPropertyValue('--angle'));},
-    set angle(angle) {BD.diverter.style.setProperty('--angle', angle + 'deg')},
-    spin: time => {
+    get angle() {return new E(BD.diverter).get('--angle');},
+    set angle(angle) {new E.prop({'--angle': angle + 'deg'}).apply(BD.diverter)},
+    spin (time) {
         if (Q('#bd.seeing:not(.blurred)')) {
             let speed = BD.meter.value = Math.max(.05, parseFloat(BD.control.value)) + (Math.random() - .5)/100;
-            //Q('bird-diverter').style.setProperty('--tilt', Math.max(0, (speed - .5 + Math.random()/10)*90) + 'deg');
+            //new E.prop({'--tilt': Math.max(0, (speed - .5 + Math.random(}).apply(Q('bird-diverter'))/10)*90) + 'deg');
             BD.angle += Math.min(100, time - BD.last)*speed*2;
         }
         BD.last = time;
@@ -115,11 +90,11 @@ const Drums = {
         if (!Q('#drum.seeing'))
             return Drums.playback.stop();
 
-        Object.entries(Drums.lastHit).forEach(([piece, lastHit]) => time - lastHit > 100 && Drums.playback.set(piece, 0));
+        new O(Drums.lastHit).each(([piece, lastHit]) => time - lastHit > 100 && Drums.playback.set(piece, 0));
 
         if (!Drums.playback.last || time - Drums.playback.last > Drums.playback.DPM) {
             let [beat, div] = Drums.playback.progress();
-            Object.entries(Drums.pattern).forEach(([piece, pattern]) => pattern[beat][div] && Drums.playback.set(piece, 1, time));
+            new O(Drums.pattern).each(([piece, pattern]) => pattern[beat][div] && Drums.playback.set(piece, 1, time));
             Drums.playback.div++;
             Drums.playback.last = time;
         }
@@ -141,7 +116,7 @@ Drums.playback.set = function(piece, on, time) {
 }
 const Scroll = {
     inited: false,
-    init: () => {
+    init () {
         Q('#drum h2').onclick = () => {
             Q('aside').hidden = false;
             if (!Scroll.inited) {
@@ -159,24 +134,24 @@ const Scroll = {
         }
         Q('aside').onclick = () => Q('aside').hidden = true;
     },
-    truncate: which => {
+    truncate (which) {
         Scroll.truncated[which] = true;
-        Q(`aside div:nth-of-type(${which+1}) hedron-p`).shadowRoot.Q('polygon', polygon => {
-            let side = parseInt(polygon.id), stroke = parseFloat(polygon.getAttribute('stroke'));
+        Q(`aside div:nth-of-type(${which+1}) hedron-p`).sQ('polygon', polygon => {
+            let side = parseInt(polygon.id), stroke = new E(polygon).get('--stroke');
             const r = new Polygon(side, stroke).normal;
             const strokeAdjusted = r - (new Polygon(side, stroke, r).radius.stroked - r);
             const points = Polygon.points(side, strokeAdjusted, -Math.PI / side, true);
     
             const animate = polygon.Q(`animate`);
-            E(animate, {
+            new E.prop({
                 from: animate.getAttribute('to') || animate.parentNode.getAttribute('points'),
                 to: points
-            });
-            E(animate.parentNode, {points});
+            }).apply(animate);
+            new E.prop({points}).apply(animate.parentNode);
             animate.beginElement();
         });
     },
-    merge: (transfer, receive) => {
+    merge (transfer, receive) {
         let [trS, reS] = [Q(`hedron-p[face="${transfer}"]`), Q(`hedron-p[face="${receive}"]`)].map(hedron => hedron.shadowRoot);
         [trS, reS].forEach(shadow => E(shadow.Q('polygon'), {stroke: shadow.host.stroke}));
         reS.Q('figure').style.fontSize = reS.host.getAttribute('scale') + 'em';

@@ -123,9 +123,9 @@ dd {
         [0   ,'🎰'   ,0   ,0      ,0   ,0    ,0     ,0       ]  /*13*/
     ].map( (tr, i) => E('tr', tr.map( td => E('td', td || '', {title: disks[i]}) )) ));
 
-    Q('tr', (tr, i) => tr.style.setProperty('--index', i+1));
+    Q('tr', (tr, i) => new E.prop({'--index': i+1}).apply(tr));
     const table = Q('table');
-    table.style.setProperty('--rows', table.Q('tr').length);
+    new E.prop({'--rows': table.Q('tr').length}).apply(table);
 
     let got = JSON.parse(cookie.got || null) || [];
     got.forEach(coor => {
@@ -143,8 +143,8 @@ dd {
     table.spin = n => {
         let cylinder = Q('tbody');
         Q('tr', tr => tr.removeAttribute('class'));
-        let k = parseInt(getComputedStyle(cylinder).getPropertyValue('--checked')) + n;
-        cylinder.style.setProperty('--checked', k);
+        let k = new E(cylinder).get('--checked') + n;
+        new E.prop({'--checked': k}).apply(cylinder);
     };
     table.spin(0);
 
