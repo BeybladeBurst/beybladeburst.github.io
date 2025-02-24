@@ -28,7 +28,7 @@ const E = function (el, ...props) {
 }
 E.prototype.get = function(...props) {return props.length > 1 ? 
     props.map(p => this.get(p)) : 
-    parseFloat(getComputedStyle(this.el).getPropertyValue(props[0]));
+    (v => +v || v)(getComputedStyle(this.el).getPropertyValue(props[0]));
 }
 Object.assign(E, {
     SVG: ['svg', 'defs', 'use', 'path', 'line', 'polygon', 'rect', 'circle', 'animate'],
